@@ -1,8 +1,23 @@
 {
   "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "outDir": "../../build/frontend"
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": ".",
+    "outDir": "../../dist/frontend",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src"
   },
-  "include": ["./**/*.ts"]
+  "include": [
+    "./**/*.tsx",
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
