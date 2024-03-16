@@ -1,5 +1,6 @@
 import LicenceDTO from "./LicenceDTO";
 import VersionDTO from "./VersionDTO";
+import RequiredProductsDTO from "./RequiredProductsDTO";
 
 export default interface ProductDTO {
   productId: string;
@@ -13,5 +14,5 @@ export default interface ProductDTO {
   updatedAt: string;
   licences: LicenceDTO[];
   versions: VersionDTO[];
-  requiredProducts?: [];
+  requiredProducts?: RequiredProductsDTO[];
 }

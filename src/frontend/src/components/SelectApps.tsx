@@ -306,124 +306,108 @@ function SelectApps() {
         requiredProducts: [],
       },
       {
-        productId: "flsujki1-sshfylsp-fqjh11qm-lb91sn00",
-        name: "ITM - Individual Tax Module",
-        version: "",
-        priority: 2,
+        productId: "a1m3f5dm-7vc6hbfz-qlx0i1by-6qyszyo0",
+        name: "Caseware Data Store Administration Tool",
+        version: "2023.00.056.14",
+        priority: 5,
         description:
-          "The built-in tax calculator allows you to easily complete individual tax returns (ITR12) and then submit in bulk directly to eFiling.",
-        type: "cwi",
+          "Only download if you are currently running or intend on running a Data Store.",
+        type: "other",
         notification: "New!",
         createdAt: "2024-02-01T08:56:07.930Z",
-        updatedAt: "2024-02-01T08:56:07.930Z",
-        licences: [
+        updatedAt: "2024-03-01T10:01:15.077Z",
+        licences: [],
+        versions: [
           {
-            sfLicenceId: "01t20000003Bn5pAAC",
-            sfProductCode: "ABITFNAN",
-            tagName: "Individual Tax Module",
-            licenceKey: "3ABF60",
-            existsInSF: true,
-            createdAt: "2024-01-16T11:44:36.998Z",
-            updatedAt: "2024-03-14T05:42:55.894Z",
-          },
-          {
-            sfLicenceId: "01t20000003Bn5lAAC",
-            sfProductCode: "ABITLNAN",
-            tagName: "Individual Tax Module",
-            licenceKey: "3ABF60",
-            existsInSF: true,
-            createdAt: "2024-01-16T11:44:36.997Z",
-            updatedAt: "2024-03-14T05:42:55.894Z",
-          },
-          {
-            sfLicenceId: "01t20000003Bn5kAAC",
-            sfProductCode: "ABITSUAN",
-            tagName: "Individual Tax Module",
-            licenceKey: "3ABF60",
-            existsInSF: true,
-            createdAt: "2024-01-16T11:44:36.996Z",
-            updatedAt: "2024-03-14T05:42:55.886Z",
+            versionId: "b3cdd130-409e-4b07-845e-bd9db0c441f6",
+            productId: "a1m3f5dm-7vc6hbfz-qlx0i1by-6qyszyo0",
+            description: "2023.00.056.14",
+            size: 37780555,
+            hash: "48be173027ed079936c46a043f961562daa399f4",
+            md5: "e4d3121b66b93b483f6772a71d11d48a",
+            createdAt: "2024-02-29T11:16:11.204Z",
+            updatedAt: "2024-02-29T11:16:11.204Z",
           },
         ],
-        versions: [],
-        requiredProducts: [],
+        requiredProducts: [
+          {
+            requiredProductId: "vwnefvpw-opyhxbve-7hlb2e6r-v7e7th00",
+          },
+          {
+            requiredProductId: "p5xixxpv-vrvpkqmy-4bki9kp2-rjql4600",
+          },
+          {
+            requiredProductId: "1qkkwpj4-1uvq6o5u-gvfmtrxz-xhfrso00",
+          },
+          {
+            requiredProductId: "d1ggrmcj-hb45xwwv-z67yso1r-3s4hmb9i",
+          },
+        ],
       },
     ]);
   }, []);
 
-  console.log("orgProducts", orgProducts);
-
   return (
     <>
       <div
+        className="card"
         style={{
           paddingLeft: "17rem !important",
           paddingRight: "17rem !important",
         }}
       >
-        <div className="card-body">
-          <div className="image-header">
-            <img
-              style={{ float: "left" }}
-              src="https://install.cqscloud.com/images/cwa-2018.png"
-            />
-            <img
-              style={{ float: "right" }}
-              src="https://install.cqscloud.com/images/adaptit-2018.png"
-            />
-          </div>
-        </div>
-        <div>
-          <h3
-            className="card-title p-3 text-center"
-            style={{ backgroundColor: "#51626f", color: "white" }}
-          >
-            Select Apps
-          </h3>
-          <div className="card">
-            <h6
-              className="card-title p-3 text-center"
-              style={{
-                backgroundColor: "#51626f",
-                color: "white",
-                fontSize: "15px",
-              }}
-            >
-              Please select the applications you would like to package &
-              download. Your current licence statement has been pre-populated
-              for your convenience.
-            </h6>
-            <div className="card-body">
-              <div>
-                <div
-                  className="pull-right text-right info-popup"
-                  style={{ float: "right", textAlign: "center" }}
-                >
-                  <h2 className="ng-binding">
-                    {/* {{ selectedProductsCount$ | async }} */}
-                  </h2>
-                  <h5>Selected</h5>
-                </div>
-                <h2
-                  style={{
-                    color: "#428bca !important",
-                    fontWeight: "100",
-                    paddingTop: "1rem",
-                    paddingBottom: "1rem",
-                  }}
-                >
-                  {/* {{ (organisation$ | async)?.name }} */}
-                  Caseware Africa, A Division of Adapt IT (Pty) Ltd
-                </h2>
-              </div>
-              {/* Show organisation products */}
-              <div
-                className="accordion accordion-flush"
-                id="accordionFlushExample"
-                style={{ paddingLeft: "40px", paddingRight: "40px" }}
-              ></div>
-              <Products orgProducts={orgProducts} />
+        <div className="card-header">
+          <div className="row">
+            <div className="col-6">
+              <img
+                style={{ float: "left" }}
+                src="https://install.cqscloud.com/images/cwa-2018.png"
+              />
             </div>
+            <div className="col-6">
+              <img
+                style={{ float: "right" }}
+                src="https://install.cqscloud.com/images/adaptit-2018.png"
+              />
+            </div>
+            <div className="row">
+              <h6 className="card-title p-3 text-center">
+                Please select the applications you would like to package &
+                download. Your current licence statement has been pre-populated
+                for your convenience.
+              </h6>
+            </div>
+          </div>
+          <div className="row"></div>
+        </div>
+        <div className="card-body">
+          <div className="card-title">
+            <div>
+              <div
+                className="pull-right text-right btn btn-outline-dark disabled"
+                style={{ float: "right", textAlign: "center" }}
+              >
+                <h2 className="ng-binding">
+                  {/* {{ selectedProductsCount$ | async }} */}2
+                </h2>
+                <h5>Selected</h5>
+              </div>
+              <h2
+                style={{
+                  color: "#428bca !important",
+                  fontWeight: "100",
+                  paddingTop: "1rem",
+                  paddingBottom: "1rem",
+                }}
+              >
+                {/* {{ (organisation$ | async)?.name }} */}
+                Caseware Africa, A Division of Adapt IT (Pty) Ltd
+              </h2>
+            </div>
+          </div>
+          <div className="card-text">
+            {/* Show organisation products */}
+            <Products orgProducts={orgProducts} />
           </div>
         </div>
       </div>
