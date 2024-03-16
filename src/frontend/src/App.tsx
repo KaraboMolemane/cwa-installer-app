@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Welcome from "./components/Welcome";
 import Eula from "./components/Eula";
 import Registration from "./components/Registration";
+import SelectApps from "./components/SelectApps";
 
 const App: React.FC = () => {
+  const [sfAccoundId, setSfAccountId] = useState("");
   const [orgProducts, setOrgProducts] = useState([{}]);
   const [selectedProducts, setSelectedProducts] = useState([{}]);
 
@@ -50,15 +52,15 @@ const App: React.FC = () => {
           </button>
           <button
             className="nav-link"
-            id="nav-products-tab"
+            id="nav-select-tab"
             data-bs-toggle="tab"
-            data-bs-target="#nav-products"
+            data-bs-target="#nav-select"
             type="button"
             role="tab"
-            aria-controls="nav-products"
+            aria-controls="nav-select"
             aria-selected="false"
           >
-            Products
+            Select Apps
           </button>
           <button
             className="nav-link"
@@ -131,11 +133,11 @@ const App: React.FC = () => {
         </div>
         <div
           className="tab-pane fade"
-          id="nav-products"
+          id="nav-select"
           role="tabpanel"
-          aria-labelledby="nav-products-tab"
+          aria-labelledby="nav-select-tab"
         >
-          ...
+          <SelectApps />
         </div>
         <div
           className="tab-pane fade"
@@ -161,7 +163,7 @@ const App: React.FC = () => {
         >
           ...
         </div>
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{marginTop: '1%'}}>
           <button className="btn btn-primary me-md-2" type="button">
             Back
           </button>

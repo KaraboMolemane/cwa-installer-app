@@ -15,7 +15,8 @@
   },
   "include": [
     "./**/*.tsx",
-    "./**/*.ts"
+    "./src/**/*.ts", // Include frontend source files
+    "./src/common/**/*.ts" // Include common DTO files
   ],
   "exclude": [
     "node_modules"
