@@ -7,7 +7,7 @@
     "start": "nw .",
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "webpack --config webpack.config.js",
-    "build:backend": "tsc -p backend"
+    "build:backend": "tsc -p src/backend"
   },
   "keywords": [],
   "author": "",
