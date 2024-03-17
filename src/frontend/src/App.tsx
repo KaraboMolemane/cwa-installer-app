@@ -5,7 +5,10 @@ import Eula from "./components/Eula";
 import Registration from "./components/Registration";
 import SelectApps from "./components/SelectApps";
 import Generate from "./components/Generate";
+import Download from "./components/Download";
+import Install from "./components/Install";
 import ProductDTO from "dto/ProductDTO";
+
 
 type AddRemoveProductsFunction = (e: any, product: ProductDTO) => void;
 
@@ -179,7 +182,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-download-tab"
         >
-          ...
+          <Download />
         </div>
         <div
           className="tab-pane fade"
@@ -187,7 +190,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-install-tab"
         >
-          ...
+          <Install />
         </div>
         <div
           className="d-grid gap-2 d-md-flex justify-content-md-end"

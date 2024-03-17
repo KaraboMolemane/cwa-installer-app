@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify.css';
+import CardHeader from "./CardHeader";
 import Products from "./Products";
 import ProductDTO from "dto/ProductDTO";
 import productData from "../data/products.json";
 
 interface SelectAppProps {
   addRemoveProducts: (e: any, product: ProductDTO) => void;
-  selectedProducts: ProductDTO[]
+  selectedProducts: ProductDTO[];
 }
 
-const SelectApps: React.FC<SelectAppProps> = ({ addRemoveProducts, selectedProducts }) => {
+const SelectApps: React.FC<SelectAppProps> = ({
+  addRemoveProducts,
+  selectedProducts,
+}) => {
   const [orgProducts, setOrgProducts] = useState<ProductDTO[]>([]);
 
   useEffect(() => {
@@ -59,27 +63,11 @@ const SelectApps: React.FC<SelectAppProps> = ({ addRemoveProducts, selectedProdu
         }}
       >
         <div className="card-header">
-          <div className="row">
-            <div className="col-6">
-              <img
-                style={{ float: "left" }}
-                src="https://install.cqscloud.com/images/cwa-2018.png"
-              />
-            </div>
-            <div className="col-6">
-              <img
-                style={{ float: "right" }}
-                src="https://install.cqscloud.com/images/adaptit-2018.png"
-              />
-            </div>
-            <div className="row">
-              <h6 className="card-title p-3 text-center">
-                Please select the applications you would like to package &
-                download. Your current licence statement has been pre-populated
-                for your convenience.
-              </h6>
-            </div>
-          </div>
+          <CardHeader
+            cardText={
+              "Please select the applications you would like to package & download. Your current licence statement has been pre-populated for your convenience."
+            }
+          />
           <div className="row"></div>
         </div>
         <div className="card-body">
@@ -89,9 +77,7 @@ const SelectApps: React.FC<SelectAppProps> = ({ addRemoveProducts, selectedProdu
                 className="pull-right text-right btn btn-outline-dark disabled"
                 style={{ float: "right", textAlign: "center" }}
               >
-                <h2 className="ng-binding">
-                  {selectedProducts.length}
-                </h2>
+                <h2 className="ng-binding">{selectedProducts.length}</h2>
                 <h5>Selected</h5>
               </div>
               <h2
