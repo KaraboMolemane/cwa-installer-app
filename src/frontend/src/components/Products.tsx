@@ -2,8 +2,12 @@ import React from "react";
 import ProductDTO from "dto/ProductDTO";
 import ProductLicenceTags from "./ProductLicenceTags";
 
-function Products(props: any) {
-  const orgProducts = props.orgProducts;
+interface ProductsProps {
+  addRemoveProducts: (e: any, product: ProductDTO) => void;
+  orgProducts: ProductDTO[];
+}
+
+const Products: React.FC<ProductsProps> = ({ addRemoveProducts, orgProducts }) => {
 
   const orgproductItems = orgProducts.map(
     (product: ProductDTO, index: number) => (
@@ -50,6 +54,7 @@ function Products(props: any) {
                       className="form-check-input"
                       type="checkbox"
                       id={"gridCheck" + index}
+                      onClick={(e) => addRemoveProducts(e, product)}
                     />
                     <label
                       style={{
@@ -94,8 +99,8 @@ function Products(props: any) {
     )
   );
 
-  const handleAddReMoveProduct = () => {
-    console.log("The checkbox was toggled");
+  const handleProductSelectClick = (e: any, product: ProductDTO) => {
+    addRemoveProducts(e, product);
   };
 
 return (
@@ -107,6 +112,7 @@ return (
       {orgproductItems}
     </div>
   );
-}
+};
+
 
 export default Products;

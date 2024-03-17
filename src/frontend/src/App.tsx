@@ -1,13 +1,36 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Welcome from "./components/Welcome";
 import Eula from "./components/Eula";
 import Registration from "./components/Registration";
 import SelectApps from "./components/SelectApps";
+import Generate from "./components/Generate";
+import ProductDTO from "dto/ProductDTO";
+
+type AddRemoveProductsFunction = (e: any, product: ProductDTO) => void;
 
 const App: React.FC = () => {
   const [sfAccoundId, setSfAccountId] = useState("");
   const [orgProducts, setOrgProducts] = useState([{}]);
-  const [selectedProducts, setSelectedProducts] = useState([{}]);
+  const [selectedProducts, setSelectedProducts] = useState<ProductDTO[]>([]);
+
+  const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
+    try {
+      if (e.target.checked) {
+        // toast("Adding product");
+        setSelectedProducts((prevSelectedProducts) => [...prevSelectedProducts, product]);
+      } else {
+        // toast("Removing product");
+        setSelectedProducts((prevSelectedProducts) =>
+        prevSelectedProducts.filter((selectedProduct) => selectedProduct.productId !== product.productId)
+      )
+      }
+    } catch (error: any) {
+      console.error("addRemoveProducts Error", error);
+      toast(error.message);
+    }
+
+  };
 
   return (
     <div>
@@ -137,7 +160,10 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-select-tab"
         >
-          <SelectApps />
+          <SelectApps
+            addRemoveProducts={addRemoveProducts}
+            selectedProducts={selectedProducts}
+          />
         </div>
         <div
           className="tab-pane fade"
@@ -145,7 +171,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-generate-tab"
         >
-          ...
+          <Generate selectedProducts={selectedProducts} />
         </div>
         <div
           className="tab-pane fade"
@@ -163,7 +189,10 @@ const App: React.FC = () => {
         >
           ...
         </div>
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{marginTop: '1%'}}>
+        <div
+          className="d-grid gap-2 d-md-flex justify-content-md-end"
+          style={{ marginTop: "1%" }}
+        >
           <button className="btn btn-primary me-md-2" type="button">
             Back
           </button>

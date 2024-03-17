@@ -3,9 +3,14 @@ import { ToastContainer, toast } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify.css';
 import Products from "./Products";
 import ProductDTO from "dto/ProductDTO";
-import productData from '../data/products.json'
+import productData from "../data/products.json";
 
-function SelectApps() {
+interface SelectAppProps {
+  addRemoveProducts: (e: any, product: ProductDTO) => void;
+  selectedProducts: ProductDTO[]
+}
+
+const SelectApps: React.FC<SelectAppProps> = ({ addRemoveProducts, selectedProducts }) => {
   const [orgProducts, setOrgProducts] = useState<ProductDTO[]>([]);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ function SelectApps() {
       toast("Response:");
 
       if (!response.ok) {
-      toast("Network response was not ok")
+        toast("Network response was not ok");
         throw new Error("Network response was not ok");
       }
       const jsonData = await response.json();
@@ -43,6 +48,7 @@ function SelectApps() {
       toast(error.message);
     }
   };
+
   return (
     <>
       <div
@@ -84,7 +90,7 @@ function SelectApps() {
                 style={{ float: "right", textAlign: "center" }}
               >
                 <h2 className="ng-binding">
-                  {/* {{ selectedProductsCount$ | async }} */}2
+                  {selectedProducts.length}
                 </h2>
                 <h5>Selected</h5>
               </div>
@@ -103,7 +109,10 @@ function SelectApps() {
           </div>
           <div className="card-text">
             {/* Show organisation products */}
-            <Products orgProducts={orgProducts} />
+            <Products
+              orgProducts={orgProducts}
+              addRemoveProducts={addRemoveProducts}
+            />
           </div>
         </div>
       </div>
@@ -111,6 +120,6 @@ function SelectApps() {
       <ToastContainer />
     </>
   );
-}
+};
 
 export default SelectApps;
