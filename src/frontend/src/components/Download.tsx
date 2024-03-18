@@ -38,7 +38,7 @@ const Download = (props: any) => {
         const product = props.selectedProducts[index];
         const fileName = `${product.productId}.zip`; // Generate file name
         const productLink =
-          combinations[Math.floor(Math.random() * (4 - 0 + 1)) + 0];
+          combinations[Math.floor(Math.random() * (3 - 0 + 1)) + 0];
         const downloadUrl = `https://cwa-installer-assets-test.s3.eu-west-1.amazonaws.com/combinations/${productLink}/CWA-Installer.zip`;
         const filePath = path.join(downloadFolder, fileName);
 
