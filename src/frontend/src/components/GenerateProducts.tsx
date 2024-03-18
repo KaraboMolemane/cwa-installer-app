@@ -15,7 +15,7 @@ function GenerateProducts(props: any) {
   );
 
   return (
-    <table className="table">
+    <table className="table table-hover">
       <thead>
         <tr>
           <th scope="col">Product name</th>

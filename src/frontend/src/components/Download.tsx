@@ -1,3 +1,4 @@
+import ProductDTO from "dto/ProductDTO";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import CardHeader from "./CardHeader";
@@ -5,7 +6,16 @@ const fs = window.require("fs");
 const path = window.require("path");
 
 const Download = (props: any) => {
-  const [downloadProgress, setDownloadProgress] = useState<number[]>([]);
+  const [downloadProgress, setDownloadProgress] = useState<
+    { productName: string; progress: number }[]
+  >([]);
+
+  const combinations = [
+    "4320515af08e67230d58f349b40f2515516229a2",
+    "b60f57c2926d3006d7c01e925c073121cc9d8ff8",
+    "a3dd46265201cd065d95c7ee70dc88cc8a243e57",
+    "6dbb9e3667d8ed9e82df23fdc39350e4bd6fc928",
+  ];
 
   const handleDownload = async () => {
     console.log("Starting download...");
@@ -26,9 +36,10 @@ const Download = (props: any) => {
 
       for (let index = 0; index < props.selectedProducts.length; index++) {
         const product = props.selectedProducts[index];
-        const fileName = `file${index + 1}.zip`;
-        const downloadUrl =
-          "https://cwa-installer-assets-test.s3.eu-west-1.amazonaws.com/combinations/4320515af08e67230d58f349b40f2515516229a2/CWA-Installer.zip";
+        const fileName = `${product.productId}.zip`; // Generate file name
+        const productLink =
+          combinations[Math.floor(Math.random() * (4 - 0 + 1)) + 0];
+        const downloadUrl = `https://cwa-installer-assets-test.s3.eu-west-1.amazonaws.com/combinations/${productLink}/CWA-Installer.zip`;
         const filePath = path.join(downloadFolder, fileName);
 
         console.log(`Downloading ${fileName} from ${downloadUrl}`);
@@ -66,7 +77,7 @@ const Download = (props: any) => {
             fileStream.end(); // Close the file stream when download is complete
             setDownloadProgress((prevProgress) => {
               const updatedProgress = [...prevProgress];
-              updatedProgress[index] = 100;
+              updatedProgress[index].progress = 100; // Update progress to 100
               return updatedProgress;
             });
             console.log(`File ${fileName} downloaded successfully`);
@@ -79,7 +90,7 @@ const Download = (props: any) => {
 
           setDownloadProgress((prevProgress) => {
             const updatedProgress = [...prevProgress];
-            updatedProgress[index] = parseFloat(progress.toFixed(2));
+            updatedProgress[index].progress = parseFloat(progress.toFixed(2)); // Update progress
             return updatedProgress;
           });
 
@@ -100,6 +111,16 @@ const Download = (props: any) => {
       toast.error("Error downloading files:", error.message || error);
     }
   };
+
+  useEffect(() => {
+    // Initialize downloadProgress state with file names
+    const initialProgress = props.selectedProducts.map(
+      (product: ProductDTO, index: number) => {
+        return { productName: product.name, progress: 0 };
+      }
+    );
+    setDownloadProgress(initialProgress);
+  }, [props.selectedProducts]);
 
   return (
     <>
@@ -126,17 +147,53 @@ const Download = (props: any) => {
                 <h2 className="ng-binding">30%</h2>
                 <h5>Overall download progress</h5>
               </div>
-              <h5 className="card-title">Download</h5>
+              <h2
+                style={{
+                  color: "#428bca !important",
+                  fontWeight: "100",
+                  paddingTop: "1rem",
+                  paddingBottom: "1rem",
+                }}
+              >
+                Download
+              </h2>
             </div>
           </div>
           <div className="card-text">
-            <button onClick={handleDownload}>Download Files</button>
+            <button className="btn btn-primary" onClick={handleDownload}>
+              Start download process
+            </button>
             <div>
-              {downloadProgress.map((progress: any, index: number) => (
-                <p key={index}>
-                  File {index + 1} Download Progress: {progress}%
-                </p>
-              ))}
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Download progress</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {downloadProgress.map((progressData, index) => (
+                    <tr key={index}>
+                      <td>{progressData.productName}</td>
+                      <td>
+                        <div
+                          className="progress"
+                          role="progressbar"
+                          aria-label="Default striped example"
+                          aria-valuenow={progressData.progress}
+                          aria-valuemin={0}
+                          aria-valuemax={100}
+                        >
+                          <div
+                            className="progress-bar progress-bar-striped"
+                            style={{ width: `${progressData.progress}%` }}
+                          ></div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
