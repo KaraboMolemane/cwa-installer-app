@@ -182,7 +182,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-download-tab"
         >
-          <Download />
+          <Download selectedProducts={selectedProducts}/>
         </div>
         <div
           className="tab-pane fade"
