@@ -24,9 +24,12 @@ function Registration(props: any) {
             "on the My Software page. If you are not sure about this process, watch this ",
             <a
               href="#"
-              target="_blank"
               className="green-link underline"
-              onClick={() => window.open("https://success.casewareafrica.com/articles/Video/CaseWare-2016-Getting-Started-How-to-download-install-and-register-CaseWare-2016")}
+              onClick={() =>
+                window.open(
+                  "https://success.casewareafrica.com/articles/Video/CaseWare-2016-Getting-Started-How-to-download-install-and-register-CaseWare-2016"
+                )
+              }
             >
               Quick Video.
             </a>,
@@ -50,29 +53,69 @@ function Registration(props: any) {
           </div>
         </div>
         <div className="card-text">
-          {/* Show organisation products */}
-          <div className="mb-3">
-            <label htmlFor="formGroupExampleInput" className="form-label">
-              Download Code / Salesforce Account ID
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="formGroupExampleInput"
-              placeholder="Enter Download Code or Salesforce Account ID"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="formGroupExampleInput2" className="form-label">
-              User Email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="formGroupExampleInput2"
-              placeholder="Enter User Email"
-            />
-          </div>
+          <form id="registrationFrom" className="row g-3">
+            <div className="col-md-12">
+              <label htmlFor="sfAccountId" className="form-label">
+                Download Code / Salesforce Account ID
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="sfAccountId"
+                required
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="userEmail" className="form-label">
+                User Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="userEmail"
+                required
+              />
+            </div>
+            <div className="col-12">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="eula"
+                  required
+                />
+                <label className="form-check-label" htmlFor="eula">
+                  <a
+                    href="#"
+                    className="green-link underline"
+                    onClick={() =>
+                      window.open("https://success.casewareafrica.com")
+                    }
+                  >
+                    Agree to the Uela terms and conditions
+                  </a>
+                </label>
+              </div>
+            </div>
+            <div className="col-12">
+              <button className="btn btn-primary" type="submit">
+                Submit form
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          className="d-grid gap-2 d-md-flex justify-content-md-end"
+          // style={{ marginTop: "1%" }}
+        >
+          <button
+            className="btn btn-primary"
+            type="submit"
+            form="registrationFrom"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

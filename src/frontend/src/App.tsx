@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import Welcome from "./components/Welcome";
-import Eula from "./components/Eula";
+import { toast } from "react-toastify";
 import Registration from "./components/Registration";
 import SelectApps from "./components/SelectApps";
 import Generate from "./components/Generate";
 import Download from "./components/Download";
 import Install from "./components/Install";
 import ProductDTO from "dto/ProductDTO";
-
 
 type AddRemoveProductsFunction = (e: any, product: ProductDTO) => void;
 
@@ -21,51 +18,31 @@ const App: React.FC = () => {
     try {
       if (e.target.checked) {
         // toast("Adding product");
-        setSelectedProducts((prevSelectedProducts) => [...prevSelectedProducts, product]);
+        setSelectedProducts((prevSelectedProducts) => [
+          ...prevSelectedProducts,
+          product,
+        ]);
       } else {
         // toast("Removing product");
         setSelectedProducts((prevSelectedProducts) =>
-        prevSelectedProducts.filter((selectedProduct) => selectedProduct.productId !== product.productId)
-      )
+          prevSelectedProducts.filter(
+            (selectedProduct) => selectedProduct.productId !== product.productId
+          )
+        );
       }
     } catch (error: any) {
       console.error("addRemoveProducts Error", error);
       toast(error.message);
     }
-
   };
 
   return (
     <div>
       <br />
       <nav>
-        <div className="nav nav-tabs" id="nav-tab" role="tablist">
+        <div className="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
           <button
             className="nav-link active"
-            id="nav-welcome-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-welcome"
-            type="button"
-            role="tab"
-            aria-controls="nav-welcome"
-            aria-selected="true"
-          >
-            Welcome
-          </button>
-          <button
-            className="nav-link"
-            id="nav-eula-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-eula"
-            type="button"
-            role="tab"
-            aria-controls="nav-eula"
-            aria-selected="true"
-          >
-            UELA
-          </button>
-          <button
-            className="nav-link"
             id="nav-registration-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-registration"
@@ -133,22 +110,6 @@ const App: React.FC = () => {
       >
         <div
           className="tab-pane fade"
-          id="nav-welcome"
-          role="tabpanel"
-          aria-labelledby="nav-welcome-tab"
-        >
-          <Welcome />
-        </div>
-        <div
-          className="tab-pane fade"
-          id="nav-eula"
-          role="tabpanel"
-          aria-labelledby="nav-eula-tab"
-        >
-          <Eula />
-        </div>
-        <div
-          className="tab-pane fade"
           id="nav-registration"
           role="tabpanel"
           aria-labelledby="nav-registration-tab"
@@ -182,7 +143,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-download-tab"
         >
-          <Download selectedProducts={selectedProducts}/>
+          <Download selectedProducts={selectedProducts} />
         </div>
         <div
           className="tab-pane fade"

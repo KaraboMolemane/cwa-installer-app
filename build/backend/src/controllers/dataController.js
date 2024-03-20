@@ -18,7 +18,7 @@ function getData(req, res) {
         console.log("hits getData");
         try {
             const data = yield (0, dataService_1.readDataFromFile)(filePath);
-            console.log('data', data);
+            console.log('hits readDataFromFile');
             res.json(data);
         }
         catch (error) {
