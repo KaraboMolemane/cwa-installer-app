@@ -87,19 +87,7 @@ const App: React.FC = () => {
             aria-controls="nav-download"
             aria-selected="false"
           >
-            Download
-          </button>
-          <button
-            className="nav-link"
-            id="nav-install-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-install"
-            type="button"
-            role="tab"
-            aria-controls="nav-install"
-            aria-selected="false"
-          >
-            Install
+            Download & Install
           </button>
         </div>
       </nav>

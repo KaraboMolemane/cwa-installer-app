@@ -93,7 +93,7 @@ function Registration(props: any) {
                       window.open("https://success.casewareafrica.com")
                     }
                   >
-                    Agree to the Uela terms and conditions
+                    Agree to the EULA terms and conditions
                   </a>
                 </label>
               </div>
