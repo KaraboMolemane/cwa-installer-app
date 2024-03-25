@@ -18,23 +18,15 @@ const SelectApps: React.FC<SelectAppProps> = ({
   const [orgProducts, setOrgProducts] = useState<ProductDTO[]>([]);
 
   useEffect(() => {
-    // fetchData();
-    setOrgProducts(productData);
+    fetchData();
+    // setOrgProducts(productData);
   }, []);
-
-  // if (typeof window !== 'undefined' && window.nw) {
-  //   const nw = require('nw.gui');
-  //   nw.Window.get().showDevTools()
-  // } else {
-  //   // Handle the case when the application is not running in NW.js
-  //   console.error('This code can only be executed in NW.js environment.');
-  // }
 
   const fetchData = async () => {
     try {
       console.log("Fetching data...");
       toast("Fetching data...");
-      const response = await fetch("/api/data");
+      const response = await fetch("http://localhost:3000/api/data");
       console.log("Response:", response);
       toast("Response:");
 
@@ -50,6 +42,7 @@ const SelectApps: React.FC<SelectAppProps> = ({
       console.error("Error fetching data:", error);
       toast("Error fetching data:");
       toast(error.message);
+      alert(error.message);
     }
   };
 
