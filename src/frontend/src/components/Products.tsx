@@ -1,16 +1,16 @@
 import React from "react";
-import ProductDTO from "dto/ProductDTO";
+import { ProductDto } from "dtos/product.dto";
 import ProductLicenceTags from "./ProductLicenceTags";
 
 interface ProductsProps {
-  addRemoveProducts: (e: any, product: ProductDTO) => void;
-  orgProducts: ProductDTO[];
+  addRemoveProducts: (e: any, product: ProductDto) => void;
+  orgProducts: ProductDto[];
 }
 
 const Products: React.FC<ProductsProps> = ({ addRemoveProducts, orgProducts }) => {
 
   const orgproductItems = orgProducts.map(
-    (product: ProductDTO, index: number) => (
+    (product: ProductDto, index: number) => (
       <div
         key={index}
         style={{
@@ -99,7 +99,7 @@ const Products: React.FC<ProductsProps> = ({ addRemoveProducts, orgProducts }) =
     )
   );
 
-  const handleProductSelectClick = (e: any, product: ProductDTO) => {
+  const handleProductSelectClick = (e: any, product: ProductDto) => {
     addRemoveProducts(e, product);
   };
 

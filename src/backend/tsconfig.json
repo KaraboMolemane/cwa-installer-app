@@ -4,7 +4,8 @@
     "module": "commonjs",
     "outDir": "../../build/backend",
     "rootDir": ".",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
   },
   "include": [
     "./**/*.ts",

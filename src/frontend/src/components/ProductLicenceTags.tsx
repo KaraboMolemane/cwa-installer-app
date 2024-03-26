@@ -1,11 +1,11 @@
-import LicencetDTO from "dto/LicenceDTO";
+import { LicenceDto } from "dtos/licence.dto";
 import React from "react";
 
 function ProductLicenceTags(props: any) {
   const productLicences = props.productLicences;
 
   const productLicencesItems = productLicences.map(
-    (licence: LicencetDTO, index: number) => {
+    (licence: LicenceDto, index: number) => {
       <div key={index}>
         <div className="badge rounded-pill bg-info">{licence.tagName}</div>
       </div>;

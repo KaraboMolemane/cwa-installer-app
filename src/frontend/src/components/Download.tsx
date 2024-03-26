@@ -1,7 +1,8 @@
-import ProductDTO from "dto/ProductDTO";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { ProductDto } from "dtos/product.dto";
 import CardHeader from "./CardHeader";
+
 const fs = window.require("fs");
 const path = window.require("path");
 
@@ -115,7 +116,7 @@ const Download = (props: any) => {
   useEffect(() => {
     // Initialize downloadProgress state with file names
     const initialProgress = props.selectedProducts.map(
-      (product: ProductDTO, index: number) => {
+      (product: ProductDto, index: number) => {
         return { productName: product.name, progress: 0 };
       }
     );

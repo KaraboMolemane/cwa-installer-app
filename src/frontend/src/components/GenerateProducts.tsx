@@ -1,14 +1,14 @@
-import ProductDTO from "dto/ProductDTO";
 import React from "react";
+import { ProductDto } from "dtos/product.dto";
 
 function GenerateProducts(props: any) {
   const selectedProducts = props.selectedProducts;
   const productItems = selectedProducts.map(
-    (product: ProductDTO, index: number) => (
+    (product: ProductDto, index: number) => (
       <tr key={index}>
         <td>{product.name}</td>
         <td>{product.version}</td>
-        <td>{product.createdAt}</td>
+        {/* <td>{product.createdAt}</td> */}
         <td></td>
       </tr>
     )

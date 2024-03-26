@@ -5,14 +5,14 @@ import SelectApps from "./components/SelectApps";
 import Generate from "./components/Generate";
 import Download from "./components/Download";
 import Install from "./components/Install";
-import ProductDTO from "dto/ProductDTO";
+import { ProductDto } from "dtos/product.dto";
 
-type AddRemoveProductsFunction = (e: any, product: ProductDTO) => void;
+type AddRemoveProductsFunction = (e: any, product: ProductDto) => void;
 
 const App: React.FC = () => {
   const [sfAccoundId, setSfAccountId] = useState("");
   const [orgProducts, setOrgProducts] = useState([{}]);
-  const [selectedProducts, setSelectedProducts] = useState<ProductDTO[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<ProductDto[]>([]);
 
   const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
     try {

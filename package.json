@@ -30,10 +30,13 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@automapper/classes": "^8.8.1",
+    "@automapper/nestjs": "^8.8.1",
     "@types/nw.gui": "^0.0.25",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "bootstrap": "^5.3.3",
+    "class-validator": "^0.14.1",
     "copy-webpack-plugin": "^12.0.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
@@ -42,7 +45,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^10.0.5",
-    "sequelize": "^6.37.1"
+    "sequelize": "^6.37.1",
+    "sequelize-typescript": "^2.1.6"
   },
   "workspaces": [
     "src/frontend",

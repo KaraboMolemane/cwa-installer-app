@@ -11,7 +11,9 @@
     "outDir": "../../dist/frontend",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
   },
   "include": [
     "./**/*.tsx",

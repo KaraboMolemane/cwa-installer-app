@@ -3,19 +3,19 @@ import { ToastContainer, toast } from "react-toastify";
 // import 'react-toastify/dist/ReactToastify.css';
 import CardHeader from "./CardHeader";
 import Products from "./Products";
-import ProductDTO from "dto/ProductDTO";
+import { ProductDto } from "dtos/product.dto";
 import productData from "../data/products.json";
 
 interface SelectAppProps {
-  addRemoveProducts: (e: any, product: ProductDTO) => void;
-  selectedProducts: ProductDTO[];
+  addRemoveProducts: (e: any, product: ProductDto) => void;
+  selectedProducts: ProductDto[];
 }
 
 const SelectApps: React.FC<SelectAppProps> = ({
   addRemoveProducts,
   selectedProducts,
 }) => {
-  const [orgProducts, setOrgProducts] = useState<ProductDTO[]>([]);
+  const [orgProducts, setOrgProducts] = useState<ProductDto[]>([]);
 
   useEffect(() => {
     fetchData();

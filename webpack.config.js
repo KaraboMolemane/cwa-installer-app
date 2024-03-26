@@ -24,8 +24,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/backend/src/dto"),
-          to: path.resolve(__dirname, "src/frontend/src/dto"),
+          from: path.resolve(__dirname, "src/backend/src/dtos"),
+          to: path.resolve(__dirname, "src/frontend/src/dtos"),
         },
       ],
     }),
