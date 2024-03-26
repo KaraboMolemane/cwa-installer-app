@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Tab } from 'bootstrap';
 import { toast } from "react-toastify";
 import Registration from "./components/Registration";
 import SelectApps from "./components/SelectApps";
@@ -29,50 +30,10 @@ const App: React.FC = () => {
   //const  API_BASE_PATH = 'http://localhost:3333/'
   const API_BASE_PATH = "https://api.test.casewareafrica.com/";
 
-  const handleRegistrationNextButton: handleRegistrationNextButtonFunction =
-    async (sfAccountIdInput, userEmail) => {
-      alert(`sfAccountIdInput:${sfAccountIdInput}`);
-      const organisationAllProducts: OrganisationDto =
-        await fetchProductsByOrganisation(sfAccountIdInput);
-      
-
-      if (!organisationAllProducts) {
-        alert(
-          "Error loading organisation details. Ensure that the account ID is typed in correctly"
-        );
-      } else {
-        setAllOrgLicences(organisationAllProducts);
-        // Show next page
-      }
-    };
-
-  const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
-    try {
-      if (e.target.checked) {
-        // toast("Adding product");
-        setSelectedProducts((prevSelectedProducts) => [
-          ...prevSelectedProducts,
-          product,
-        ]);
-      } else {
-        // toast("Removing product");
-        setSelectedProducts((prevSelectedProducts) =>
-          prevSelectedProducts.filter(
-            (selectedProduct) => selectedProduct.productId !== product.productId
-          )
-        );
-      }
-    } catch (error: any) {
-      console.error("addRemoveProducts Error", error);
-      toast(error.message);
-    }
-  };
-
   const fetchProductsByOrganisation = async (sfAccountId: string) => {
     try {
       console.log("fetchProductsByOrganisation - Fetching data...");
       toast("fetchProductsByOrganisation- Fetching data...");
-      alert(`${API_BASE_PATH}/api/organisations/${sfAccountId}/products`);
       const response = await fetch(
         `${API_BASE_PATH}api/organisations/${sfAccountId}/products`
       );
@@ -100,6 +61,58 @@ const App: React.FC = () => {
       alert(error.message);
     }
   };
+
+  const handleRegistrationNextButton: handleRegistrationNextButtonFunction =
+  async (sfAccountIdInput, userEmail) => {
+    const organisationAllProducts: OrganisationDto =
+      await fetchProductsByOrganisation(sfAccountIdInput);
+    
+    if (!organisationAllProducts) {
+      // TODO: Replace with a proper bootsrap alert above the 'Next Button' 
+      alert(
+        "Error loading organisation details. Please ensure that the account ID correct."
+      );
+    } else {
+      setAllOrgLicences(organisationAllProducts);
+      // Show next page
+      try {
+        const selectAppTabTrigger = document.querySelector('#nav-select-tab');
+        if(selectAppTabTrigger){
+          const selectAppTab = new Tab(selectAppTabTrigger);
+          selectAppTab.show();
+        }
+      } catch (error) {
+        console.log(error);
+        alert(`cannot go to tab: ${error}`);
+      }
+    }
+  };
+
+
+
+  const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
+    try {
+      if (e.target.checked) {
+        // toast("Adding product");
+        setSelectedProducts((prevSelectedProducts) => [
+          ...prevSelectedProducts,
+          product,
+        ]);
+      } else {
+        // toast("Removing product");
+        setSelectedProducts((prevSelectedProducts) =>
+          prevSelectedProducts.filter(
+            (selectedProduct) => selectedProduct.productId !== product.productId
+          )
+        );
+      }
+    } catch (error: any) {
+      console.error("addRemoveProducts Error", error);
+      toast(error.message);
+    }
+  };
+
+
 
   return (
     <div>
@@ -214,17 +227,6 @@ const App: React.FC = () => {
           aria-labelledby="nav-install-tab"
         >
           <Install />
-        </div>
-        <div
-          className="d-grid gap-2 d-md-flex justify-content-md-end"
-          style={{ marginTop: "1%" }}
-        >
-          <button className="btn btn-primary me-md-2" type="button">
-            Back
-          </button>
-          <button className="btn btn-primary" type="button">
-            Next
-          </button>
         </div>
       </div>
     </div>

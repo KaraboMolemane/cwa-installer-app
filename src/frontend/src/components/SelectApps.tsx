@@ -26,9 +26,11 @@ const SelectApps: React.FC<SelectAppProps> = ({
   >([]);
 
   useEffect(() => {
-    // fetchJSONData();
-    // setOrgProducts(productData);
-    getOrganisationProducts();
+    if (allOrgLicences.sfAccountId != "") {
+      // fetchJSONData();
+      // setOrgProducts(productData);
+      getOrganisationProducts();
+    }
   }, [allOrgLicences]);
 
   const getOrganisationProducts = async () => {
@@ -310,6 +312,17 @@ const SelectApps: React.FC<SelectAppProps> = ({
               orgProducts={organisationProducts}
               addRemoveProducts={addRemoveProducts}
             />
+          </div>
+          <div
+            className="d-grid gap-2 d-md-flex justify-content-md-end"
+            style={{ marginTop: "1%" }}
+          >
+            <button className="btn btn-primary me-md-2" type="button">
+              Back
+            </button>
+            <button className="btn btn-primary" type="button">
+              Next
+            </button>
           </div>
         </div>
       </div>

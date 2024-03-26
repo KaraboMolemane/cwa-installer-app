@@ -129,7 +129,7 @@ const Registration: React.FC<RegistrationProps> = ({
         </div>
         <div
           className="d-grid gap-2 d-md-flex justify-content-md-end"
-          // style={{ marginTop: "1%" }}
+          style={{ marginTop: "1%" }}
         >
           <button
             className="btn btn-primary"
