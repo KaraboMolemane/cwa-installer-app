@@ -6,13 +6,45 @@ import Generate from "./components/Generate";
 import Download from "./components/Download";
 import Install from "./components/Install";
 import { ProductDto } from "dtos/product.dto";
+import { OrganisationDto } from "dtos/organisation.dto";
 
+type handleRegistrationNextButtonFunction = (
+  sfAccountIdInput: string,
+  userEmail: string
+) => void;
 type AddRemoveProductsFunction = (e: any, product: ProductDto) => void;
 
 const App: React.FC = () => {
-  // const [sfAccoundId, setSfAccountId] = useState("");
-  // const [orgProducts, setOrgProducts] = useState([{}]);
   const [selectedProducts, setSelectedProducts] = useState<ProductDto[]>([]);
+  const [allOrgLicences, setAllOrgLicences] = useState<OrganisationDto>({
+    sfAccountId: "",
+    name: "",
+    downloadCode: "",
+    createdAt: "",
+    updatedAt: "",
+    bundles: [],
+    licences: [],
+    organisationProductType: [],
+  });
+  //const  API_BASE_PATH = 'http://localhost:3333/'
+  const API_BASE_PATH = "https://api.test.casewareafrica.com/";
+
+  const handleRegistrationNextButton: handleRegistrationNextButtonFunction =
+    async (sfAccountIdInput, userEmail) => {
+      alert(`sfAccountIdInput:${sfAccountIdInput}`);
+      const organisationAllProducts: OrganisationDto =
+        await fetchProductsByOrganisation(sfAccountIdInput);
+      
+
+      if (!organisationAllProducts) {
+        alert(
+          "Error loading organisation details. Ensure that the account ID is typed in correctly"
+        );
+      } else {
+        setAllOrgLicences(organisationAllProducts);
+        // Show next page
+      }
+    };
 
   const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
     try {
@@ -36,11 +68,48 @@ const App: React.FC = () => {
     }
   };
 
+  const fetchProductsByOrganisation = async (sfAccountId: string) => {
+    try {
+      console.log("fetchProductsByOrganisation - Fetching data...");
+      toast("fetchProductsByOrganisation- Fetching data...");
+      alert(`${API_BASE_PATH}/api/organisations/${sfAccountId}/products`);
+      const response = await fetch(
+        `${API_BASE_PATH}api/organisations/${sfAccountId}/products`
+      );
+      console.log("fetchProductsByOrganisation - Response:", response);
+      toast("fetchProductsByOrganisation - Response:");
+
+      if (!response.ok) {
+        toast("fetchProductsByOrganisation - Network response was not ok");
+        throw new Error(
+          "fetchProductsByOrganisation - Network response was not ok"
+        );
+      }
+      const jsonData = await response.json();
+      console.log("fetchProductsByOrganisation - JSON Data:", jsonData);
+      toast("fetchProductsByOrganisation -JSON Data:");
+      // setOrganisationProducts(jsonData);
+      return jsonData;
+    } catch (error: any) {
+      console.error(
+        "fetchProductsByOrganisation - Error fetching data:",
+        error
+      );
+      toast("fetchProductsByOrganisation - Error fetching data:");
+      toast(error.message);
+      alert(error.message);
+    }
+  };
+
   return (
     <div>
       <br />
       <nav>
-        <div className="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+        <div
+          className="nav nav-tabs d-flex justify-content-center"
+          id="nav-tab"
+          role="tablist"
+        >
           <button
             className="nav-link active"
             id="nav-registration-tab"
@@ -103,7 +172,10 @@ const App: React.FC = () => {
           aria-labelledby="nav-registration-tab"
         >
           <div>
-            <Registration />
+            <Registration
+              handleRegistrationNextButton={handleRegistrationNextButton}
+              API_BASE_PATH={API_BASE_PATH}
+            />
           </div>
         </div>
         <div
@@ -115,6 +187,8 @@ const App: React.FC = () => {
           <SelectApps
             addRemoveProducts={addRemoveProducts}
             selectedProducts={selectedProducts}
+            allOrgLicences={allOrgLicences}
+            API_BASE_PATH={API_BASE_PATH}
           />
         </div>
         <div

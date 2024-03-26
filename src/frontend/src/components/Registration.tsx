@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import CardHeader from "./CardHeader";
 
-function Registration(props: any) {
+interface RegistrationProps {
+  handleRegistrationNextButton: (
+    sfAccountId: string,
+    userEmail: string
+  ) => void;
+  API_BASE_PATH: string;
+}
+
+const Registration: React.FC<RegistrationProps> = ({
+  handleRegistrationNextButton,
+  API_BASE_PATH,
+}) => {
+  const [sfAccountIdInput, setSfAccountIdInput] = useState<string>("");
+  const [userEmailInput, setUserEmailInput] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+    handleRegistrationNextButton(sfAccountIdInput, userEmailInput);
+  };
+
   return (
     <div
       className="card"
@@ -53,26 +72,34 @@ function Registration(props: any) {
           </div>
         </div>
         <div className="card-text">
-          <form id="registrationFrom" className="row g-3">
+          <form
+            id="registrationFrom"
+            className="row g-3"
+            onSubmit={handleSubmit}
+          >
             <div className="col-md-12">
-              <label htmlFor="sfAccountId" className="form-label">
+              <label htmlFor="sfAccountIdInput" className="form-label">
                 Download Code / Salesforce Account ID
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="sfAccountId"
+                id="sfAccountIdInput"
+                value={sfAccountIdInput}
+                onChange={(e) => setSfAccountIdInput(e.target.value)}
                 required
               />
             </div>
             <div className="col-md-12">
-              <label htmlFor="userEmail" className="form-label">
+              <label htmlFor="userEmailInput" className="form-label">
                 User Email
               </label>
               <input
                 type="email"
                 className="form-control"
-                id="userEmail"
+                id="userEmailInput"
+                value={userEmailInput}
+                onChange={(e) => setUserEmailInput(e.target.value)}
                 required
               />
             </div>
@@ -98,11 +125,6 @@ function Registration(props: any) {
                 </label>
               </div>
             </div>
-            <div className="col-12">
-              <button className="btn btn-primary" type="submit">
-                Submit form
-              </button>
-            </div>
           </form>
         </div>
         <div
@@ -120,6 +142,6 @@ function Registration(props: any) {
       </div>
     </div>
   );
-}
+};
 
 export default Registration;
