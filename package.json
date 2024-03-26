@@ -5,10 +5,11 @@
   "main": "./src/frontend/src/index.html",
   "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "nw .",
-    "build": "npm run build:frontend && npm run build:backend",
+    "start:frontend": "nw .",
     "build:frontend": "webpack --config webpack.config.js",
-    "build:backend": "tsc -p src/backend"
+    "start:backend": "ts-node src/backend/src/index.ts",
+    "build:backend": "tsc -p src/backend",
+    "build": "npm run build:frontend && npm run build:backend"
   },
   "keywords": [],
   "author": "",
@@ -34,10 +35,17 @@
     "@types/react-dom": "^18.2.22",
     "bootstrap": "^5.3.3",
     "copy-webpack-plugin": "^12.0.2",
-    "express": "^4.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "pg": "^8.11.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-toastify": "^10.0.5"
-  }
+    "react-toastify": "^10.0.5",
+    "sequelize": "^6.37.1"
+  },
+  "workspaces": [
+    "src/frontend",
+    "src/backend"
+  ]
 }
