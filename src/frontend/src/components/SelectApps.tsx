@@ -18,11 +18,11 @@ const SelectApps: React.FC<SelectAppProps> = ({
   const [orgProducts, setOrgProducts] = useState<ProductDto[]>([]);
 
   useEffect(() => {
-    fetchData();
+    fetchJSONData();
     // setOrgProducts(productData);
   }, []);
 
-  const fetchData = async () => {
+  const fetchJSONData = async () => {
     try {
       console.log("Fetching data...");
       toast("Fetching data...");

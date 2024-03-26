@@ -10,8 +10,8 @@ import { ProductDto } from "dtos/product.dto";
 type AddRemoveProductsFunction = (e: any, product: ProductDto) => void;
 
 const App: React.FC = () => {
-  const [sfAccoundId, setSfAccountId] = useState("");
-  const [orgProducts, setOrgProducts] = useState([{}]);
+  // const [sfAccoundId, setSfAccountId] = useState("");
+  // const [orgProducts, setOrgProducts] = useState([{}]);
   const [selectedProducts, setSelectedProducts] = useState<ProductDto[]>([]);
 
   const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
