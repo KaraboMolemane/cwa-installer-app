@@ -6,7 +6,15 @@ import CardHeader from "./CardHeader";
 const fs = window.require("fs");
 const path = window.require("path");
 
-const Download = (props: any) => {
+interface DownloadProps {
+  selectedProducts: ProductDto[];
+  handleDownloadBackButton: () => void;
+}
+
+const Download: React.FC<DownloadProps> = ({
+  selectedProducts,
+  handleDownloadBackButton,
+}) => {
   const [downloadProgress, setDownloadProgress] = useState<
     { productName: string; progress: number }[]
   >([]);
@@ -35,8 +43,8 @@ const Download = (props: any) => {
         fs.mkdirSync(downloadFolder, { recursive: true });
       }
 
-      for (let index = 0; index < props.selectedProducts.length; index++) {
-        const product = props.selectedProducts[index];
+      for (let index = 0; index < selectedProducts.length; index++) {
+        const product = selectedProducts[index];
         const fileName = `${product.productId}.zip`; // Generate file name
         const productLink =
           combinations[Math.floor(Math.random() * (3 - 0 + 1)) + 0];
@@ -115,13 +123,13 @@ const Download = (props: any) => {
 
   useEffect(() => {
     // Initialize downloadProgress state with file names
-    const initialProgress = props.selectedProducts.map(
+    const initialProgress = selectedProducts.map(
       (product: ProductDto, index: number) => {
         return { productName: product.name, progress: 0 };
       }
     );
     setDownloadProgress(initialProgress);
-  }, [props.selectedProducts]);
+  }, [selectedProducts]);
 
   return (
     <>
@@ -196,6 +204,19 @@ const Download = (props: any) => {
                 </tbody>
               </table>
             </div>
+          </div>
+          <div
+            className="d-grid gap-2 d-md-flex justify-content-md-end"
+            style={{ marginTop: "1%" }}
+          >
+            <button
+              className="btn btn-primary me-md-2"
+              type="button"
+              onClick={handleDownloadBackButton}
+            >
+              Back
+            </button>
+
           </div>
         </div>
       </div>

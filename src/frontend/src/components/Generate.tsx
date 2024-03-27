@@ -47,7 +47,7 @@ const Generate: React.FC<GenerateProps> = ({
           <GenerateProducts selectedProducts={selectedProducts} />
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <span
+          {/* <span
             className="d-inline-block"
             tabIndex={0}
             data-bs-toggle="popover"
@@ -57,7 +57,7 @@ const Generate: React.FC<GenerateProps> = ({
             <button className="btn btn-primary" type="button" disabled>
               Popover test
             </button>
-          </span>
+          </span> */}
         </div>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
           <div className="form-check">
@@ -66,7 +66,6 @@ const Generate: React.FC<GenerateProps> = ({
               type="checkbox"
               value=""
               id="lnstallCheck"
-              checked
             />
             <label
               className="form-check-label"
@@ -86,7 +85,6 @@ const Generate: React.FC<GenerateProps> = ({
               type="checkbox"
               value=""
               id="localZipCheck"
-              checked
             />
             <label
               className="form-check-label"

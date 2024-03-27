@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab } from "bootstrap";
 import { toast } from "react-toastify";
 import Registration from "./components/Registration";
@@ -17,9 +17,12 @@ type handleSelectAppNextButtonFunction = () => void;
 type handleSelectAppBackButtonFunction = () => void;
 type handleGenerateNextButtonFunction = () => void;
 type handleGenerateBackButtonFunction = () => void;
+type handleDownloadNextButtonFunction = () => void;
+type handleDownloadBackButtonFunction = () => void;
 type AddRemoveProductsFunction = (e: any, product: ProductDto) => void;
 
 const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("nav-registration-tab"); // Set the initial active tab to 'nav-registration'
   const [selectedProducts, setSelectedProducts] = useState<ProductDto[]>([]);
   const [allOrgLicences, setAllOrgLicences] = useState<OrganisationDto>({
     sfAccountId: "",
@@ -33,6 +36,10 @@ const App: React.FC = () => {
   });
   //const  API_BASE_PATH = 'http://localhost:3333/'
   const API_BASE_PATH = "https://api.test.casewareafrica.com/";
+  const activeTabPaneId = "nav-registration";
+
+  
+  
 
   const fetchProductsByOrganisation = async (sfAccountId: string) => {
     try {
@@ -130,12 +137,13 @@ const App: React.FC = () => {
   const handleGenerateNextButton: handleGenerateNextButtonFunction =
     async () => {
       if (selectedProducts.length === 0) {
-        // TODO: Replace with a proper bootsrap alert above the 'Next Button'
+        // TO-DO: Replace with a proper bootsrap alert above the 'Next Button'
+        // TO-DO: Check the checkboxes and handle them accordingly 
         alert("Please make selections before proceeding.");
       } else {
         // Show next page
         try {
-          const tabTrigger = document.querySelector("#nav-download");
+          const tabTrigger = document.querySelector("#nav-download-tab");
           if (tabTrigger) {
             const tab = new Tab(tabTrigger);
             tab.show();
@@ -151,7 +159,43 @@ const App: React.FC = () => {
     async () => {
       // Show next page
       try {
-        const tabTrigger = document.querySelector("#nav-selectn-tab");
+        const tabTrigger = document.querySelector("#nav-select-tab");
+        if (tabTrigger) {
+          const tab = new Tab(tabTrigger);
+          tab.show();
+        }
+      } catch (error) {
+        console.log(error);
+        alert(`cannot go to tab: ${error}`);
+      }
+    };
+
+
+    // const handleDownloadNextButton: handleDownloadNextButtonFunction =
+    // async () => {
+    //   if (selectedProducts.length === 0) {
+    //     // TODO: Replace with a proper bootsrap alert above the 'Next Button'
+    //     alert("Please make selections before proceeding.");
+    //   } else {
+    //     // Show next page
+    //     try {
+    //       const tabTrigger = document.querySelector("#");
+    //       if (tabTrigger) {
+    //         const tab = new Tab(tabTrigger);
+    //         tab.show();
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //       alert(`cannot go to tab: ${error}`);
+    //     }
+    //   }
+    // };
+
+  const handleDownloadBackButton: handleDownloadBackButtonFunction =
+    async () => {
+      // Show next page
+      try {
+        const tabTrigger = document.querySelector("nav-generate-tab");
         if (tabTrigger) {
           const tab = new Tab(tabTrigger);
           tab.show();
@@ -249,7 +293,7 @@ const App: React.FC = () => {
         style={{ margin: "2% 2% 2% 2%" }}
       >
         <div
-          className="tab-pane fade"
+          className={`tab-pane fade${activeTabPaneId === "nav-registration" ? " show active" : ""}`}
           id="nav-registration"
           role="tabpanel"
           aria-labelledby="nav-registration-tab"
@@ -294,7 +338,7 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-download-tab"
         >
-          <Download selectedProducts={selectedProducts} />
+          <Download selectedProducts={selectedProducts}  handleDownloadBackButton={handleDownloadBackButton}/>
         </div>
         <div
           className="tab-pane fade"
