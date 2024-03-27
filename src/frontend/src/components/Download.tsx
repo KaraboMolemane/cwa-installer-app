@@ -134,7 +134,7 @@ const Download = (props: any) => {
       >
         <div className="card-header">
           <CardHeader
-            cardText={"Please wait while applications are being downloaded..."}
+            cardText={"Please wait while applications are being downloaded and installed..."}
           />
           <div className="row"></div>
         </div>

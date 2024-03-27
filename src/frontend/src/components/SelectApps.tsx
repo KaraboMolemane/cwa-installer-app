@@ -13,6 +13,8 @@ interface SelectAppProps {
   selectedProducts: ProductDto[];
   allOrgLicences: OrganisationDto;
   API_BASE_PATH: string;
+  handleSelectAppNextButton: () => void;
+  handleSelectAppBackButton: () => void;
 }
 
 const SelectApps: React.FC<SelectAppProps> = ({
@@ -20,6 +22,8 @@ const SelectApps: React.FC<SelectAppProps> = ({
   selectedProducts,
   allOrgLicences,
   API_BASE_PATH,
+  handleSelectAppNextButton,
+  handleSelectAppBackButton,
 }) => {
   const [organisationProducts, setOrganisationProducts] = useState<
     ProductDto[]
@@ -317,10 +321,18 @@ const SelectApps: React.FC<SelectAppProps> = ({
             className="d-grid gap-2 d-md-flex justify-content-md-end"
             style={{ marginTop: "1%" }}
           >
-            <button className="btn btn-primary me-md-2" type="button">
+            <button
+              className="btn btn-primary me-md-2"
+              type="button"
+              onClick={handleSelectAppBackButton}
+            >
               Back
             </button>
-            <button className="btn btn-primary" type="button">
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleSelectAppNextButton}
+            >
               Next
             </button>
           </div>

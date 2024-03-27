@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tab } from 'bootstrap';
+import { Tab } from "bootstrap";
 import { toast } from "react-toastify";
 import Registration from "./components/Registration";
 import SelectApps from "./components/SelectApps";
@@ -13,6 +13,10 @@ type handleRegistrationNextButtonFunction = (
   sfAccountIdInput: string,
   userEmail: string
 ) => void;
+type handleSelectAppNextButtonFunction = () => void;
+type handleSelectAppBackButtonFunction = () => void;
+type handleGenerateNextButtonFunction = () => void;
+type handleGenerateBackButtonFunction = () => void;
 type AddRemoveProductsFunction = (e: any, product: ProductDto) => void;
 
 const App: React.FC = () => {
@@ -63,32 +67,100 @@ const App: React.FC = () => {
   };
 
   const handleRegistrationNextButton: handleRegistrationNextButtonFunction =
-  async (sfAccountIdInput, userEmail) => {
-    const organisationAllProducts: OrganisationDto =
-      await fetchProductsByOrganisation(sfAccountIdInput);
-    
-    if (!organisationAllProducts) {
-      // TODO: Replace with a proper bootsrap alert above the 'Next Button' 
-      alert(
-        "Error loading organisation details. Please ensure that the account ID correct."
-      );
-    } else {
-      setAllOrgLicences(organisationAllProducts);
+    async (sfAccountIdInput, userEmail) => {
+      const organisationAllProducts: OrganisationDto =
+        await fetchProductsByOrganisation(sfAccountIdInput);
+
+      if (!organisationAllProducts) {
+        // TODO: Replace with a proper bootsrap alert above the 'Next Button'
+        alert(
+          "Error loading organisation details. Please ensure that the account ID correct."
+        );
+      } else {
+        setAllOrgLicences(organisationAllProducts);
+        // Show next page
+        try {
+          const selectAppTabTrigger = document.querySelector("#nav-select-tab");
+          if (selectAppTabTrigger) {
+            const selectAppTab = new Tab(selectAppTabTrigger);
+            selectAppTab.show();
+          }
+        } catch (error) {
+          console.log(error);
+          alert(`cannot go to tab: ${error}`);
+        }
+      }
+    };
+
+  const handleSelectAppNextButton: handleSelectAppNextButtonFunction =
+    async () => {
+      if (selectedProducts.length === 0) {
+        // TODO: Replace with a proper bootsrap alert above the 'Next Button'
+        alert("Please make selections before proceeding.");
+      } else {
+        // Show next page
+        try {
+          const tabTrigger = document.querySelector("#nav-generate-tab");
+          if (tabTrigger) {
+            const tab = new Tab(tabTrigger);
+            tab.show();
+          }
+        } catch (error) {
+          console.log(error);
+          alert(`cannot go to tab: ${error}`);
+        }
+      }
+    };
+
+  const handleSelectAppBackButton: handleSelectAppBackButtonFunction =
+    async () => {
       // Show next page
       try {
-        const selectAppTabTrigger = document.querySelector('#nav-select-tab');
-        if(selectAppTabTrigger){
-          const selectAppTab = new Tab(selectAppTabTrigger);
-          selectAppTab.show();
+        const tabTrigger = document.querySelector("#nav-registration-tab");
+        if (tabTrigger) {
+          const tab = new Tab(tabTrigger);
+          tab.show();
         }
       } catch (error) {
         console.log(error);
         alert(`cannot go to tab: ${error}`);
       }
-    }
-  };
+    };
 
+  const handleGenerateNextButton: handleGenerateNextButtonFunction =
+    async () => {
+      if (selectedProducts.length === 0) {
+        // TODO: Replace with a proper bootsrap alert above the 'Next Button'
+        alert("Please make selections before proceeding.");
+      } else {
+        // Show next page
+        try {
+          const tabTrigger = document.querySelector("#nav-download");
+          if (tabTrigger) {
+            const tab = new Tab(tabTrigger);
+            tab.show();
+          }
+        } catch (error) {
+          console.log(error);
+          alert(`cannot go to tab: ${error}`);
+        }
+      }
+    };
 
+  const handleGenerateBackButton: handleGenerateBackButtonFunction =
+    async () => {
+      // Show next page
+      try {
+        const tabTrigger = document.querySelector("#nav-selectn-tab");
+        if (tabTrigger) {
+          const tab = new Tab(tabTrigger);
+          tab.show();
+        }
+      } catch (error) {
+        console.log(error);
+        alert(`cannot go to tab: ${error}`);
+      }
+    };
 
   const addRemoveProducts: AddRemoveProductsFunction = async (e, product) => {
     try {
@@ -111,8 +183,6 @@ const App: React.FC = () => {
       toast(error.message);
     }
   };
-
-
 
   return (
     <div>
@@ -202,6 +272,8 @@ const App: React.FC = () => {
             selectedProducts={selectedProducts}
             allOrgLicences={allOrgLicences}
             API_BASE_PATH={API_BASE_PATH}
+            handleSelectAppNextButton={handleSelectAppNextButton}
+            handleSelectAppBackButton={handleSelectAppBackButton}
           />
         </div>
         <div
@@ -210,7 +282,11 @@ const App: React.FC = () => {
           role="tabpanel"
           aria-labelledby="nav-generate-tab"
         >
-          <Generate selectedProducts={selectedProducts} />
+          <Generate
+            selectedProducts={selectedProducts}
+            handleGenerateNextButton={handleGenerateNextButton}
+            handleGenerateBackButton={handleGenerateBackButton}
+          />
         </div>
         <div
           className="tab-pane fade"
